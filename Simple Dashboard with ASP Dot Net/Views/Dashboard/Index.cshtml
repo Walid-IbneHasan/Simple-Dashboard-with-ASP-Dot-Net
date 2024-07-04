@@ -1,0 +1,73 @@
+﻿@model Simple_Dashboard_with_ASP_Dot_Net.Models.DashboardViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+</head>
+<body>
+    <h1>Inventory List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Inventories)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h1>Member List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model.Members)
+            {
+                <tr>
+                    <td>@member.Id</td>
+                    <td>@member.Name</td>
+                    <td>@member.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h1>Inventory Assignments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Inventory Name</th>
+                <th>Member Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var assignment in Model.Assignments)
+            {
+                var inventory = Model.Inventories.First(i => i.Id == assignment.InventoryId);
+                var member = Model.Members.First(m => m.Id == assignment.MemberId);
+                <tr>
+                    <td>@inventory.Name</td>
+                    <td>@member.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
